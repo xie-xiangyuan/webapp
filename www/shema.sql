@@ -6,18 +6,6 @@ use awesome;
 
 grant select, insert, update, delete on awesome.* to 'root'@'localhost' identified by 'password';
 
-#管理员表
-/*
-create table admins(
-    `id` varchar(50) not null,
-    `name` varchar(50) not null,
-    `password` varchar(50) not null,
-    `admin` bool not null,
-    unique key `idx_name`(`name`),
-    primary key (`id`)
-) engine=innodb default charset=utf8;
-*/
-
 #新闻列表
 create table news (
     `id` varchar(50) not null,
