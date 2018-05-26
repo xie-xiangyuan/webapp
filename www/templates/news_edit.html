@@ -1,0 +1,60 @@
+{% extends 'admin.html' %}
+
+{% block title %}编辑新闻{% endblock %}
+
+{% block script %}
+<script>
+$(function (){
+    var vm=new Vue({
+        el:'#vm',
+        data:{name:'',summary:'',content:'',id:''},
+        methods:
+        {
+            submit:function(e){
+                e.preventDefault();
+                var $form=$('#vm').find('form');
+                if (this.$data.name==='' || this.$data.summary==='' || this.$data.content===''){ window.alert('标题、摘要、内容都不能为空!');return }
+                $form.postJSON('/manage/edit/new',this.$data,function(err,r){
+                    if (err){$form.showFormError(err);}
+                    else {return location.assign('/templates/admin.html')}
+                });
+            }
+        }
+    });
+    $('#vm').show(); 
+})
+</script>
+{% endblock %}
+
+{% block content %}
+    <div id="vm" class="uk-width-2-3" align='center'>
+        <form v-on="submit: submit" class="uk-form uk-form-stacked">
+            <div class="uk-alert uk-alert-danger uk-hidden"></div>
+            <div class="uk-form-row">
+                <div class="uk-form-controls">
+                    <input v-model="id" name="id" type="text" style="display:none" value="{{new.id}}">
+                </div>
+                <label class="uk-form-label">标题:</label>
+                <div class="uk-form-controls">
+                    <input v-model="name" name="name" type="text" value="{{new.name}}" class="uk-width-1-1">
+                </div>
+            </div>
+            <div class="uk-form-row">
+                <label class="uk-form-label">摘要:</label>
+                <div class="uk-form-controls">
+                    <textarea v-model="summary" rows="4" name="summary"  class="uk-width-1-1" style="resize:none;">{{new.summary}}</textarea>
+                </div>
+            </div>
+            <div class="uk-form-row">
+                <label class="uk-form-label">内容:</label>
+                <div class="uk-form-controls">
+                    <textarea v-model="content" rows="16" name="content" class="uk-width-1-1" style="resize:none;">{{new.content}}</textarea>
+                </div>
+            </div>
+            <div class="uk-form-row">
+                <button type="submit" class="uk-button uk-button-primary"><i class="uk-icon-save"></i> 保存</button>
+                <a href="/templates/admin.html" class="uk-button"><i class="uk-icon-times"></i> 取消</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}
