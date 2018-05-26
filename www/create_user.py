@@ -10,9 +10,9 @@ from models import User
 
 @asyncio.coroutine
 def create_user():
-    yield from orm.create_pool(loop=loop,user='root',password='password',db='awesome')
+    yield from orm.create_pool(loop=loop,user='',password='',db='awesome')
 
-    u = User(name='admin',email='admin@example.com',passwd='admin123',admin=True,image='about:blank')
+    u = User(name='',email='admin@example.com',passwd='',admin=,image='about:blank')
 
     yield from u.save()
 
