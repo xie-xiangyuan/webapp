@@ -1,0 +1,28 @@
+{% extends 'project_intro.html' %}
+
+{% block title %}新闻{% endblock %}
+
+{% block script %}
+{% endblock %}
+
+{% block content %}
+        
+            <div class="header">
+                <a href="/"><img src="/static/images/nav.png"></a>
+            </div>
+            <h3  align="center" style="color:red ">新闻</h3>
+            <hr class="uk-article-divider">
+            <div class="uk-width-medium-1">
+                <ul >
+                    <li><h3  align="center" >{{new.name}}</h3></li>
+                    <li><h6 align="center">发表于{{new.created_at|datetime_filter}}</h6></li>
+                    <li><h3><pre >{{new.content|safe}}</pre></h3></li>
+                </ul>           
+            </div>
+            <br>
+            <br>                  
+            <div class="footer_new"  style="background-image:url(/static/images/foot.png)">
+                <div class="codebox"><a href='/templates/login.html' target='_blank'><img src="/static/images/weixin.png" /></a></div>
+            </div>
+     
+{% endblock %}

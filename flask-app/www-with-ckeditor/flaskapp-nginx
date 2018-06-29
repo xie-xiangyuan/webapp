@@ -1,0 +1,37 @@
+server {
+    listen 80;
+    server_name www.xn--55qw16e4m2a.com;
+    charset utf-8;
+    client_max_body_size 75M;
+    location /favicon.ico {
+        root /srv/www-with-ckeditor;
+    }
+    location ~ ^\/static\/.*$ {
+        root /srv/www-with-ckeditor;
+    }
+
+    location / { try_files $uri @app; }
+    location @app {
+        include uwsgi_params;
+        uwsgi_pass unix:/tmp/uwsgi.sock;
+    }
+}
+
+server {
+    listen 80;
+    server_name www.xn--55qw16e4m2a.cn;
+    charset utf-8;
+    client_max_body_size 75M;
+    location /favicon.ico {
+        root /srv/www-with-ckeditor;
+    }
+    location ~ ^\/static\/.*$ {
+        root /srv/www-with-ckeditor;
+    }
+
+    location / { try_files $uri @app; }
+    location @app {
+        include uwsgi_params;
+        uwsgi_pass unix:/tmp/uwsgi.sock;
+    }
+}

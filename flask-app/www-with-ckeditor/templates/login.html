@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>后台登录</title>
+        <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon" />
+        <script src="/static/js/jquery.min.js"></script>
+        <link rel="stylesheet" href="/static/css/uikit.min.css">
+        <script src="/static/js/uikit.min.js"></script>
+    </head>
+    <body>
+        <div class="uk-vertical-align uk-text-center uk-height-1-1">
+        <div class="uk-vertical-align-middle" style="width: 320px">
+            <br>
+            <p><h3>管理员登录</h3></p>
+            {% if err %}
+                <p style="color:red "><strong>Error:{{err}}</strong></p>
+            {% endif %}
+            <form  class="uk-panel uk-panel-box uk-form" method="POST" action="{{ url_for('admin') }}">
+                <div class="uk-alert uk-alert-danger uk-hidden"></div>
+                <div class="uk-form-row">
+                    <div class="uk-form-icon uk-width-1-1">
+                        <i class="uk-icon-envelope-o"></i>
+                        <input  name="name" type="text" placeholder="用户名" maxlength="50" class="uk-width-1-1 uk-form-large">
+                    </div>
+                </div>
+                <div class="uk-form-row">
+                    <div class="uk-form-icon uk-width-1-1">
+                        <i class="uk-icon-lock"></i>
+                        <input  name="passwd" type="password" placeholder="口令" maxlength="50" class="uk-width-1-1 uk-form-large">
+                    </div>
+                </div>
+                <div class="uk-form-row">
+                    <button type="submit" class="uk-width-1-1 uk-button uk-button-primary uk-button-large"><i class="uk-icon-sign-in"></i> 登录</button>
+                </div>
+            </form>
+            <p><a href="/" class="uk-icon-button"><i class="uk-icon-html5"></i></a> <a href="/">返回首页</a></p>
+        </div>
+        </div>
+    </body>
+</html>

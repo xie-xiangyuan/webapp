@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>{% block title %} ? {% endblock %}-瀛公馆</title>
+        <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="/static/css/uikit.min.css">
+        <link rel="stylesheet" href="/static/css/uikit.gradient.min.css">
+        <link rel="stylesheet" href="/static/css/awesome.css" />
+        <link rel="stylesheet" href="/static/css/style.css" />
+        <script src="/static/js/jquery.min.js"></script>
+        <script src="/static/js/jquery-1.9.0.min.js"></script>
+        <script src="/static/js/sha1.min.js"></script>
+        <script src="/static/js/uikit.min.js"></script>
+        <script src="/static/js/sticky.min.js"></script>
+        <script src="/static/js/vue.min.js"></script>
+        <script src="/static/js/awesome.js"></script>
+        {% block beforehead %} {%  endblock %}
+    </head>
+    <body>
+        <div class="wrap">
+            {% block infirst %}  {% endblock %}
+            <div class="insecond">
+                <div class="con">
+                    <div class="header">
+                        <a href="/"><img src="/static/images/nav.png"></a>
+                    </div>
+
+                    {% block content %}
+
+                    {% endblock %}
+                    
+                    <div class="footer" style="background-image:url(/static/images/foot.png)">
+                        <div class="codebox"><a href='/templates/login.html'><img src="/static/images/weixin.png" /></a></div>
+                     </div>
+                </div>
+            </div>
+        </div>
+        {% block script %} <!--some script 引导页-->{% endblock %}
+    </body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>{% block title%}新闻列表{% endblock %}</title>
+        <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="/static/css/uikit.min.css">
+        <link rel="stylesheet" href="/static/css/uikit.gradient.min.css">
+        <script src="/static/js/jquery.min.js"></script>
+        <script src="/static/js/uikit.min.js"></script>
+        <script src="/static/js/vue.min.js"></script>
+        <script src="/static/js/awesome.js"></script><!--for postJSON() -->
+        {% block script %}
+        <script>
+           function edit_new(n){
+             location.assign('/manage/news/edit/' + n.id);
+         }
+         function delete_new(n,p){ 
+            if(window.confirm('确认要删除?')){
+                postJSON('/manage/news/delete',{id:n.id},function(err,r){
+                    if(err){ return alert(err.message || err.error || err);}
+                    gotoPage(p);
+                });
+            }
+        }
+        
+        function gotoPage(p) {
+            var r = parseQueryString();
+            r.page = p;
+            location.assign('?' + $.param(r));
+        }
+        
+        </script>
+        {% endblock %}
+    </head>
+    <body>
+        {% block content %}
+            <div class="uk-width-1-1 uk-margin-bottom">
+                <div class="uk-panel uk-panel-box">
+                    <ul class="uk-breadcrumb">
+                        <li class="uk-active">新闻列表</li>
+                        <li ><a href="/manage/others"><span>国家认证</span></a></li>
+                        <li><a href="/manage/others">项目概况</a></li>
+                        <li ><a href="/manage/others"><span>医养结合</span></a></li>
+                        <li ><a href="/manage/others"><span>会员专区</span></a></li>
+                        <li ><a href="/api/signout"><span>退出登录</span></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <a href="/manage/news/create" target='_blank' class="uk-button uk-button-primary"><i class='uk-icon-plus'></i>增加新闻</a>
+            </div>
+            <div class='uk-width-1-1'>
+                <table class="uk-table uk-table-hover">
+                    <thead>
+                        <tr>
+                            <th class="uk-width-4-10">标题 / 摘要</th>                            
+                            <th class="uk-width-2-10">创建时间</th>
+                            <th class="uk-width-2-10">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for new in news%}
+                        <tr>
+                            <td>
+                                <span>{{new.name}}</span>
+                            </td>                       
+                            <td>
+                                <span>{{new.created_at}}</span>
+                            </td>
+                            <td>
+                                <span  onclick="edit_new({{new}})"><i class="uk-icon-button uk-icon-edit"></i></span>
+                                <span  onclick="delete_new({{new}},{{page.page_index}})"><i class="uk-icon-button uk-icon-trash-o"></i></span>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div>
+                    <ul class="uk-pagination" > 
+                      {% if page.has_previous %}
+                        <li onclick="gotoPage({{page.page_index-1}})"><span><i class="uk-icon-angle-double-left"></i></span></li> 
+                      {% else %}
+                        <li class="uk-disabled"><span ><i class="uk-icon-angle-double-left"></i></span></li> 
+                      {% endif %}
+                        <li class="uk-active"><span >{{page.page_index}}</span></li> 
+                      {% if page.has_next %}
+                        <li onclick="gotoPage({{page.page_index+1}})" ><span><i class="uk-icon-angle-double-right"></i></span></li> 
+                      {% else %}
+                        <li class="uk-disabled"><span ><i class="uk-icon-angle-double-right"></i></span></li> 
+                      {% endif %}
+                    </ul>
+                </div>
+            </div>
+        {% endblock %}
+    </body>
+</html>

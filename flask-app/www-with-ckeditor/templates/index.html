@@ -1,0 +1,164 @@
+{% extends  '__base__.html' %}
+
+{% block title %} 首页 {% endblock %}
+
+{% block infirst %}
+  <div class="infirst">
+    <div class="bgdiv">
+      <div class="inf1"></div><div class="inf2"></div><div class="inf3"></div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block script %} <!--some script 引导页-->
+<script>
+$(window).load(function(e) {
+  
+});
+$(document).ready(function(e) {
+   
+});
+window.onload=inac();
+function inac(){
+    autosize();
+    $(".infirst").fadeIn(300);
+    $(".infirst").click(function(e) {
+        inbc();
+    });
+    setTimeout('inbc();',5000);
+    $(".infirst .inf1").animate({opacity:1},1000,function(){
+          $(".inf2").animate({height:56},500,function(){
+          $(".inf3").animate({width:276},1000);
+            });
+        });
+}
+
+function inbc(){
+    $(".infirst .inf1").animate({opacity:0});
+    $(".inf2").animate({height:0});
+    $(".inf3").animate({width:0});
+    $(".infirst").fadeOut(300);
+    $(".insecond").fadeIn(300);
+}
+
+function autosize(){
+  //引导页
+  winh=$(window).height();
+  
+    if(winh>660){
+        $(".bgdiv").height(winh-32);
+        $(".insecond .con").css({"height":winh-32+"px"});
+    }
+    if(winh<660 || winh==660){
+        $(".bgdiv").height(660);
+        $(".insecond .con").css({"height":"630px"});
+    }
+        
+}
+
+$(window).resize(function(e) {
+    autosize();
+});
+</script>
+{%  endblock %}
+
+{% block content %}
+      <div class="w793 in3ul">
+        <div class="li a">
+          <div class="listbox">
+            <div class="conbox">               
+              <div class="top"></div>
+              <div class="img"><img src="/static/images/li1.jpg"></div>
+              <div class="nav">
+                <ul class="aul">
+                  <li><a href="/templates/project_intro.html/1" >项目概况</a></li>
+                  <li><a href="/templates/project_intro.html/1" >国家认证</a></li>
+                  <li><a href="/templates/project_intro.html/1" >新闻中心</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="bot"></div>
+          </div>
+        </div>
+        <div class="li b">
+          <div class="listbox">
+            <div class="conbox">
+              <div class="top"></div>
+              <div class="img"><img src="/static/images/li2.jpg"></div>
+              <div class="nav">
+                <ul class="bul fl">
+                    <div class="t2p"><i class="yi1"></i></div>
+                    <li><a href="/templates/project_intro.html/1">专家团队</a></li>
+                    <li><a href="/templates/project_intro.html/1">绿色通道</a></li>
+                    <li><a href="/templates/project_intro.html/1">24小时值守</a></li>
+                    <li><a href="/templates/project_intro.html/1">医保定点</a></li>
+                    <li><a href="/templates/project_intro.html/1">康复中心</a></li>
+                    <li><a href="/templates/project_intro.html/1">健康管理</a></li>
+                </ul>
+                <ul class="bul fr">
+                    <div class="t2p"><i class="yi2"></i></div>
+                    <li><a href="/templates/project_intro.html/1">温泉会馆</a></li>
+                    <li><a href="/templates/project_intro.html/1">蔬菜基地</a></li>
+                    <li><a href="/templates/project_intro.html/1">老年大学</a></li>
+                    <li><a href="/templates/project_intro.html/1">专属公寓</a></li>
+                    <li><a href="/templates/project_intro.html/1">会员会所</a></li>
+                    <li><a href="/templates/project_intro.html/1">生活照护</a></li>
+                </ul>
+                <div class="clearfix"></div>
+              </div>
+            </div>
+            <div class="bot"></div>
+          </div>
+        </div>
+        <div class="li c">
+          <div class="listbox">
+            <div class="conbox">
+              <div class="top"></div>
+              <div class="img"><img src="/static/images/li3.jpg"></div>
+              <div class="nav">
+                <ul class="aul">
+                  <li><a href="/templates/project_intro.html/1">会员权益</a></li>
+                  <li><a href="/templates/project_intro.html/1">会员章程</a></li>
+                  <li><a href="/templates/project_intro.html/1" target="_blank">网上商城</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="bot"></div>
+          </div>
+        </div>
+        <div class="blank70"></div>
+      </div>
+{% endblock %}
+
+{% block content_my %}
+        <div data-uk-scrollspy="{cls:'uk-animation-fade', target:'.my-class', delay:300}">
+            <!-- 无延时 -->
+            <div class="my-class">
+                <ul>
+                    <li><img src="/static/images/li1.png"></li>
+                    <li>
+                        <img src="/static/images/li1.jpg">
+                        <div class="uk-animation-toggle">
+                            <div class="uk-card uk-card-default uk-card-body uk-animation-slide-bottom-medium">
+                            <p class="uk-text-center">项目概况</p>
+                            <p class="uk-text-center">国家认证</p>
+                            <p class="uk-text-center">新闻中心</p>
+                            </div>
+                            <!--
+                            <div class="uk-card uk-card-default uk-card-body uk-animation-slide-bottom-medium">
+                            <p class="uk-text-center">国家认证</p>
+                            </div>
+                            <div class="uk-card uk-card-default uk-card-body uk-animation-slide-bottom-medium">
+                            <p class="uk-text-center">新闻中心</p>
+                            </div>
+                            -->
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!-- 300ms 延时 -->
+            <div class="my-class"><li><img src="/static/images/li2.jpg"></li></div>
+            <!-- 600ms 延时 -->
+            <div class="my-class"><li><img src="/static/images/li3.jpg"></li></div>
+        </div>
+{% endblock %}

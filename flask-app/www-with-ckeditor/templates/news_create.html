@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>{% block title%}创建新闻{% endblock %}</title>
+        <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon" />
+    </head>
+    <body>
+    {% block content%}
+        <div class="warpper" style="width: 700px; margin: auto">
+        <form method="post">
+            {% if err %}
+                <p style="color:red "><strong>{{err}}</strong></p>
+            {% endif %}
+            {{ form.csrf_token }}
+            <br>
+            {{ form.title.label }}<br>
+            {{ form.title }}<br><br>
+            {{ form.body.label }}<br>
+            {{ form.body }}
+            <br>
+            {{ form.submit }}
+        </form>
+        </div>
+        {{ ckeditor.load() }}
+        {{ ckeditor.config(name='body') }}
+    {% endblock %}
+    </body>
+</html>

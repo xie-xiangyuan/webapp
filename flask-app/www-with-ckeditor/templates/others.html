@@ -1,0 +1,60 @@
+{% extends 'admin.html' %}
+
+{% block title %}其它项目{% endblock %}
+
+{% block script %}
+<script>
+        function edit_other(o){
+             window.open('/manage/others/edit/' + o.id);
+         }
+        function delete_other(o){ 
+            if(window.confirm('确认要删除?')){
+                getJSON('/manage/others/delete',{id:o.id},function(err,r){
+                    if(err){ return alert(err.message || err.error || err);}
+                    location.assign('/manage/others');
+                });
+            }
+        }
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="uk-width-1-1 uk-margin-bottom">
+    <div class="uk-panel uk-panel-box">
+        <ul class="uk-breadcrumb">
+            <li ><a href="/templates/admin"><span>新闻列表</span></a></li>
+            <li ><a href="/manage/others"><span>国家认证</span></a></li>
+            <li ><a href="/manage/others">项目概况</a></li>
+            <li ><a href="/manage/others"><span>医养结合</span></a></li>
+            <li ><a href="/manage/others"><span>会员专区</span></a></li>
+            <li ><a href="/api/signout"><span>退出登录</span></a></li>
+        </ul>
+    </div>
+</div>
+<div>
+    <a href="/manage/others/add" target='_blank' class="uk-button uk-button-primary"><i class='uk-icon-plus'></i>增加项目</a>
+</div>
+<div class='uk-width-1-1'>
+    <table class="uk-table uk-table-hover">
+        <thead>
+            <tr>
+                <th class="uk-width-5-10">项目</th>
+                <th class="uk-width-5-10">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for other in others%}
+            <tr>
+                <td>
+                    <span>{{other.name}}</span>
+                </td>
+                <td>
+                    <span  onclick="edit_other({{other}})"><i class="uk-icon-button uk-icon-edit"></i></span>
+                    <span  onclick="delete_other({{other}})"><i class="uk-icon-button uk-icon-trash-o"></i></span>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
